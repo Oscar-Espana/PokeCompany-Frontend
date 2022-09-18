@@ -1,6 +1,7 @@
 import type { NextPage } from "next";
 import { useEffect, useState } from "react";
 import { getAllPokemons } from "../src/api/pokemon/getAllPokemons";
+import { PokemonList } from "../src/components/pokemons";
 import { ISmallPokemon } from "../src/interfaces";
 
 const Home: NextPage = () => {
@@ -14,9 +15,7 @@ const Home: NextPage = () => {
     getPokemonsData();
   }, []);
 
-  console.log("pokemons", pokemons);
-
-  return <h1>Hello World</h1>;
+  return <PokemonList pokemons={pokemons} />;
 };
 
 export default Home;
