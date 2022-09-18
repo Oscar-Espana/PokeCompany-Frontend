@@ -1,7 +1,21 @@
-import { Box } from "@mui/material";
 import type { NextPage } from "next";
+import { useEffect, useState } from "react";
+import { getAllPokemons } from "../src/api/pokemon/getAllPokemons";
+import { ISmallPokemon } from "../src/interfaces";
 
 const Home: NextPage = () => {
+  const [pokemons, setPokemons] = useState<ISmallPokemon[]>([]);
+
+  const getPokemonsData = async () => {
+    const allPokemons = await getAllPokemons();
+    setPokemons(allPokemons);
+  };
+  useEffect(() => {
+    getPokemonsData();
+  }, []);
+
+  console.log("pokemons", pokemons);
+
   return <h1>Hello World</h1>;
 };
 
