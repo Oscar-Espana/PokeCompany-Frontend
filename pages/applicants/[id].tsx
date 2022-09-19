@@ -1,17 +1,34 @@
 import type { NextPage } from "next";
 import { GetServerSideProps } from "next";
-import { IApplicant, IApplicantCreate } from "../../src/interfaces";
+import { IApplicant } from "../../src/interfaces";
 import { DefaultLayout } from "../../src/layouts";
 import { Button, Divider, Grid, Typography } from "@mui/material";
-import { createApplicant, getSingleApplicant } from "../../src/api/applicant";
+import {
+  applicantHired,
+  applicantReject,
+  getSingleApplicant,
+} from "../../src/api/applicant";
 import Image from "next/image";
 import { Box } from "@mui/system";
+import { useRouter } from "next/router";
 
 interface Props {
   applicant: IApplicant;
 }
 const ApplicantDetailsPage: NextPage<Props> = ({ applicant }) => {
-  const handleConfirm = async () => {};
+  const router = useRouter();
+
+  const handleHired = async () => {
+    const response = await applicantHired(applicant.id);
+    alert(response);
+    router.replace("/applicants");
+  };
+
+  const handleReject = async () => {
+    const response = await applicantReject(applicant.id);
+    alert(response);
+    router.replace("/applicants");
+  };
 
   return (
     <DefaultLayout
@@ -53,12 +70,17 @@ const ApplicantDetailsPage: NextPage<Props> = ({ applicant }) => {
           <Typography variant="body1" fontWeight={400} my={1}>
             {applicant.job.description}
           </Typography>
-          <Box mt={2}>
-            <Button size="medium" color="secondary" variant="outlined">
-              Hire
+          <Box mt={2} sx={{ display: "flex", gap: 2 }}>
+            <Button size="medium" color="error" onClick={handleReject}>
+              Reject
             </Button>
-            <Button size="medium" color="error" sx={{ ml: 2 }}>
-              Discart
+            <Button
+              size="medium"
+              color="secondary"
+              variant="outlined"
+              onClick={handleHired}
+            >
+              Hire
             </Button>
           </Box>
         </Grid>
