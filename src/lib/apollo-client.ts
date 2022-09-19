@@ -5,4 +5,10 @@ const clientPokeApi = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
+const clientPokemonCompany = new ApolloClient({
+  uri: "http://localhost:3000/graphql",
+  cache: new InMemoryCache(),
+});
+
 export default clientPokeApi;
+export { clientPokemonCompany };
