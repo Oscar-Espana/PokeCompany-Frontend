@@ -1,22 +1,14 @@
 import type { NextPage } from "next";
-import { useEffect, useState } from "react";
-import { IApplicant, IJob } from "../../src/interfaces";
+import { GetServerSideProps } from "next";
+import { IApplicant } from "../../src/interfaces";
 import { DefaultLayout } from "../../src/layouts";
-import { JobList } from "../../src/components/jobs";
 import { getAllApplicants } from "../../src/api/applicant";
 import { Typography } from "@mui/material";
 
-const JobPage: NextPage = () => {
-  const [applicants, setApplicants] = useState<IApplicant[]>([]);
-
-  const getApplicantsData = async () => {
-    const allApplicants = await getAllApplicants();
-    setApplicants(allApplicants);
-  };
-  useEffect(() => {
-    getApplicantsData();
-  }, []);
-
+interface Props {
+  applicants: IApplicant[];
+}
+const ApplicantPage: NextPage<Props> = ({ applicants }) => {
   return (
     <DefaultLayout
       title="Applicants - PokeCompany"
@@ -39,4 +31,14 @@ const JobPage: NextPage = () => {
   );
 };
 
-export default JobPage;
+export const getServerSideProps: GetServerSideProps = async (req) => {
+  const applicants = await getAllApplicants();
+
+  return {
+    props: {
+      applicants,
+    },
+  };
+};
+
+export default ApplicantPage;
