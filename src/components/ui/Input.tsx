@@ -10,6 +10,7 @@ interface Props
     InputHTMLAttributes<HTMLInputElement> {
   label: string;
   name: string;
+  multiline?: boolean;
 }
 
 export const Input = (props: Props) => {
@@ -25,6 +26,8 @@ export const Input = (props: Props) => {
       size="medium"
       fullWidth
       margin="normal"
+      multiline={props.multiline}
+      rows={4}
     />
   );
 };

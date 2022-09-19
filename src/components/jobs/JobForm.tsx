@@ -3,6 +3,7 @@ import { Formik, Form, FormikHelpers } from "formik";
 import { Input } from "../ui";
 import { IApplicantCreate } from "../../interfaces";
 import { Box, Button } from "@mui/material";
+import { applicationSchema } from "../../lib/validationSchema";
 
 interface Props {
   jobId: string;
@@ -29,7 +30,11 @@ export const JobForm: FC<Props> = ({ jobId, onSubmit }) => {
         borderRadius: 4,
       }}
     >
-      <Formik initialValues={initialForm} onSubmit={onSubmit}>
+      <Formik
+        initialValues={initialForm}
+        validationSchema={applicationSchema}
+        onSubmit={onSubmit}
+      >
         <Form>
           <Input name="fullName" label="Full name" />
           <Input name="email" label="Email" />
@@ -39,7 +44,7 @@ export const JobForm: FC<Props> = ({ jobId, onSubmit }) => {
             label="Favorite pokemon"
             type="number"
           />
-          <Input name="description" label="Description" />
+          <Input name="description" label="Description" multiline={true} />
           <Box display="flex" justifyContent="end">
             <Button type="submit" color="secondary" size="large" sx={{ mt: 2 }}>
               Apply
