@@ -9,9 +9,17 @@ const GET_ALL_APPLICANTS = gql`
       fullName
       email
       phoneNumber
-      favoritePokemonId
+      favoritePokemon {
+        id
+        name
+        img
+      }
       description
-      jobId
+      job {
+        id
+        title
+        description
+      }
       status
     }
   }

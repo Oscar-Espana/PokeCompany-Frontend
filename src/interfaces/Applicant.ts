@@ -1,11 +1,17 @@
+import { IJob } from "./Job";
+import { ISmallPokemon } from "./Pokemon";
+
 export interface IApplicant {
   id: string;
   fullName: string;
   email: string;
   phoneNumber: string;
-  favoritePokemonId: number;
+  favoritePokemon: ISmallPokemon;
   description: string;
-  jobId: string;
+  job: IJob;
   status: string;
 }
-export interface IApplicantCreate extends Omit<IApplicant, "id" | "status"> {}
+export interface IApplicantCreate extends Omit<IApplicant, "id" | "status"> {
+  favoritePokemonId: number;
+  jobId: string;
+}

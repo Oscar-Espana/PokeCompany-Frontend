@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
 import { clientPokemonCompany } from "../../lib/apollo-client";
-import { IJob } from "../../interfaces";
+import { IApplicant, IJob } from "../../interfaces";
 
 const GET_SINGLE_APPLICANT = gql`
   query Applicant($applicantId: String!) {
@@ -9,16 +9,24 @@ const GET_SINGLE_APPLICANT = gql`
       fullName
       email
       phoneNumber
-      favoritePokemonId
+      favoritePokemon {
+        id
+        name
+        img
+      }
       description
-      jobId
+      job {
+        id
+        title
+        description
+      }
       status
     }
   }
 `;
 
 export const getSingleApplicant = async (id: string) => {
-  const { data } = await clientPokemonCompany.query<{ applicant: IJob }>({
+  const { data } = await clientPokemonCompany.query<{ applicant: IApplicant }>({
     query: GET_SINGLE_APPLICANT,
     variables: {
       applicantId: id,
