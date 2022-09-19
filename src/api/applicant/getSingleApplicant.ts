@@ -31,6 +31,7 @@ export const getSingleApplicant = async (id: string) => {
     variables: {
       applicantId: id,
     },
+    fetchPolicy: "no-cache",
   });
   return data.applicant;
 };

@@ -30,6 +30,7 @@ export const getAllApplicants = async () => {
     applicants: IApplicant[];
   }>({
     query: GET_ALL_APPLICANTS,
+    fetchPolicy: "no-cache",
   });
   return data.applicants;
 };
