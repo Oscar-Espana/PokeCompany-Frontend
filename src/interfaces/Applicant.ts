@@ -11,7 +11,8 @@ export interface IApplicant {
   job: IJob;
   status: string;
 }
-export interface IApplicantCreate extends Omit<IApplicant, "id" | "status"> {
+export interface IApplicantCreate
+  extends Omit<IApplicant, "id" | "status" | "favoritePokemon" | "job"> {
   favoritePokemonId: number;
   jobId: string;
 }

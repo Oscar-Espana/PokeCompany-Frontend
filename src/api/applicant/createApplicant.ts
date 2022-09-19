@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
 import { clientPokemonCompany } from "../../lib/apollo-client";
-import { IApplicantCreate, IJob } from "../../interfaces";
+import { IApplicantCreate } from "../../interfaces";
 
 const CREATE_APPLICANT = gql`
   mutation ApplicantCreate($applicant: ApplicantInput) {
@@ -9,9 +9,17 @@ const CREATE_APPLICANT = gql`
       fullName
       email
       phoneNumber
-      favoritePokemonId
+      favoritePokemon {
+        id
+        name
+        img
+      }
       description
-      jobId
+      job {
+        id
+        title
+        description
+      }
       status
     }
   }
